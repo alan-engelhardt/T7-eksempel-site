@@ -1,4 +1,4 @@
-const url = `https://kea-alt-del.dk/t7/api/products?limit=20&start=200`;
+const url = `https://kea-alt-del.dk/t7/api/products?limit=20&start=0`;
 const skabelon = document.querySelector("template").content;
 const container = document.querySelector("main");
 

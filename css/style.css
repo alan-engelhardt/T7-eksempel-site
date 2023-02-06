@@ -83,8 +83,7 @@ html {
   color: var(--background-color);
   padding: 1rem;
 }
-.productlist article .discounted,
-.productlist article .price span {
+.productlist article .discounted {
   display: none;
 }
 .productlist article.onSale .discounted {
@@ -95,7 +94,9 @@ html {
   margin-bottom: 0;
 }
 .productlist article.onSale .price span {
-  display: initial;
+  /* display: initial; */
+  text-decoration: line-through;
+  color: var(--off-color);
 }
 .productlist article button {
   margin-top: auto;
