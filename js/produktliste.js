@@ -1,4 +1,8 @@
-const url = `https://kea-alt-del.dk/t7/api/products?limit=20&start=0`;
+const urlParams = new URLSearchParams(window.location.search);
+const kat = urlParams.get("kat");
+document.querySelector("h2").textContent = kat;
+
+const url = `https://kea-alt-del.dk/t7/api/products?limit=20&category=${kat}`;
 const skabelon = document.querySelector("template").content;
 const container = document.querySelector("main");
 
@@ -9,6 +13,7 @@ function getData() {
 }
 
 function visProdukter(produkt) {
+  console.log(produkt);
   const kopi = skabelon.cloneNode(true);
   const imgurl = `https://kea-alt-del.dk/t7/images/webp/640/${produkt.id}.webp`;
   kopi.querySelector("img").src = imgurl;
