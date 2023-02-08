@@ -29,6 +29,12 @@ html {
   text-decoration: none;
 }
 
+/*Brands*/
+.brandlist a {
+  display: block;
+  margin-bottom: 0.2em;
+}
+
 /*Category*/
 .categorylist {
   display: grid;
@@ -174,5 +180,9 @@ dt {
   .breadcrumbs li:last-child::after {
     background: none;
     content: "";
+  }
+
+  .brandlist {
+    column-count: 3;
   }
 }
