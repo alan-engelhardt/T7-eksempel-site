@@ -14,5 +14,5 @@ function getData() {
 
 function visEmner(emne) {
   const key = Object.keys(emne)[0];
-  container.innerHTML += `<a href="productlist.html?cat=Accessories">${emne.category}</a>`;
+  container.innerHTML += `<a href="productlist.html?cat=${emne.category}">${emne.category}</a>`;
 }
