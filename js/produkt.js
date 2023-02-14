@@ -1,4 +1,5 @@
-const id = 1651;
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
 const url = `https://kea-alt-del.dk/t7/api/products/${id}`;
 
 function getProduct() {
@@ -11,6 +12,9 @@ function visProdukt(produkt) {
   document.querySelector(".purchaseBox h3").textContent = produkt.productdisplayname;
   document.querySelector("img").src = `https://kea-alt-del.dk/t7/images/webp/640/${id}.webp`;
   document.querySelector("img").alt = produkt.productdisplayname;
+  document.querySelector(".breadcrumbs li+li+li a").textContent = produkt.category;
+  document.querySelector(".breadcrumbs li+li+li a").href += produkt.category;
+  document.querySelector(".breadcrumbs li+li+li+li").textContent = produkt.productdisplayname;
   // etc. med de øvrige data
 }
 

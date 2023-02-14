@@ -20,7 +20,9 @@ function visProdukter(produkt) {
   kopi.querySelector("img").src = imgurl;
   kopi.querySelector("img").alt = produkt.productdisplayname;
   kopi.querySelector("h3").textContent = produkt.productdisplayname;
+  kopi.querySelector(".subtle").textContent = produkt.usagetype;
   kopi.querySelector(".price span").textContent = produkt.price;
+  kopi.querySelector("a").href += produkt.id;
   if (produkt.soldout) {
     kopi.querySelector("article").classList.add("soldOut");
   }
