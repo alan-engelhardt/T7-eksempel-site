@@ -14,7 +14,7 @@ function visProdukt(produkt) {
   document.querySelector("img").alt = produkt.productdisplayname;
   document.querySelector(".breadcrumbs li+li+li a").textContent = produkt.category;
   document.querySelector(".breadcrumbs li+li+li a").href += produkt.category;
-  document.querySelector(".breadcrumbs li+li+li+li").textContent = produkt.productdisplayname;
+  document.querySelector(".breadcrumbs li:last-of-type").textContent = produkt.productdisplayname;
   // etc. med de øvrige data
 }
 

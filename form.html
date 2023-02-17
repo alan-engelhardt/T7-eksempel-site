@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+</head>
+
+<body>
+    <h1>Form test</h1>
+    <form action="">
+        <label for="navn">
+            Navn
+            <input type="text" name="navn">
+        </label>
+        <label for="email">
+            E-mail
+            <input type="email" name="email">
+        </label>
+        <input type="submit" value="Send">
+    </form>
+
+    <ul></ul>
+
+    <script>
+        const liste = document.querySelector("ul");
+        const form = document.querySelector("form");
+        const url = "https://test2-ebca.restdb.io/rest/mailingliste";
+        const key = "5fcf499dff9d67063814034f";
+
+        form.addEventListener("submit", handleForm);
+
+        function handleForm(e) {
+            e.preventDefault();
+            const input = {
+                navn: form.elements.navn.value,
+                email: form.elements.email.value,
+            }
+            const options = {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-apikey": key,
+                },
+                body: JSON.stringify(input),
+            };
+            fetch(url, options).then(res => { res.json(); console.log(res.statusText) })
+            hentListe();
+        }
+
+        function hentListe() {
+            const options = {
+                headers: {
+                    "x-apikey": key,
+                }
+            };
+            fetch(url, options).then(res => res.json()).then(vis);
+        }
+
+        function vis(mailingliste) {
+            liste.textContent = "";
+            mailingliste.forEach(medlem => {
+                const nyLi = document.createElement("li");
+                nyLi.textContent = medlem.navn + " " + medlem.email;
+                liste.appendChild(nyLi)
+            });
+        }
+
+        hentListe()
+    </script>
+</body>
+
+</html>
