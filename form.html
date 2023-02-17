@@ -6,23 +6,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>form</title>
+    <style>
+        body {
+            margin-left: 1em;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        section {
+            max-width: 400px;
+        }
+
+        form,
+        li {
+            padding: 1em;
+            background: #eee;
+            border-radius: 1em;
+        }
+
+        label,
+        input[type="submit"] {
+            display: block;
+            margin-top: .5em;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style-type: none;
+            margin: 1em 0;
+            position: relative;
+        }
+
+        li span {
+            padding: .8em;
+            position: absolute;
+            cursor: pointer;
+            right: 0;
+            top: 0;
+        }
+
+        li span:hover {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Form test</h1>
-    <form action="">
-        <label for="navn">
-            Navn
+    <h2>Meld dig ind og skriv til os</h2>
+    <section>
+        <form action="">
+            <label for="navn">Navn </label>
             <input type="text" name="navn">
-        </label>
-        <label for="email">
-            E-mail
-            <input type="email" name="email">
-        </label>
-        <input type="submit" value="Send">
-    </form>
+            <label for="email">E-mail </label>
+            <input type="email" name="email"></label>
+            <label for="tekst">Har du en besked til os?</label>
+            <textarea name="tekst" id="" cols="30" rows="10"></textarea>
+            <input type="submit" value="Send">
+        </form>
 
-    <ul></ul>
+        <ul></ul>
+    </section>
 
     <script>
         const liste = document.querySelector("ul");
@@ -33,10 +80,12 @@
         form.addEventListener("submit", handleForm);
 
         function handleForm(e) {
+            console.log(form.elements.tekst.value)
             e.preventDefault();
             const input = {
                 navn: form.elements.navn.value,
                 email: form.elements.email.value,
+                tekst: form.elements.tekst.value,
             }
             const options = {
                 method: "post",
@@ -46,8 +95,7 @@
                 },
                 body: JSON.stringify(input),
             };
-            fetch(url, options).then(res => { res.json(); console.log(res.statusText) })
-            hentListe();
+            fetch(url, options).then(res => { res.json(); console.log(res.statusText) }).then(hentListe);
         }
 
         function hentListe() {
@@ -63,9 +111,32 @@
             liste.textContent = "";
             mailingliste.forEach(medlem => {
                 const nyLi = document.createElement("li");
-                nyLi.textContent = medlem.navn + " " + medlem.email;
-                liste.appendChild(nyLi)
+                const nyP = document.createElement("p");
+                const nyS = document.createElement("span");
+                nyLi.innerHTML = medlem.navn + " <a href='mailto:" + medlem.email + "'>" + medlem.email + "</a>";
+                nyP.textContent = medlem.tekst;
+                nyS.innerHTML = "&#10005";
+                nyS.id = medlem._id;
+                nyS.addEventListener("click", slet);
+                nyLi.appendChild(nyP);
+                nyLi.appendChild(nyS);
+                liste.appendChild(nyLi);
             });
+        }
+
+        function slet() {
+            console.log(this);
+            if (confirm("Slet bruger?")) {
+                //this.parentElement.remove();
+                const options = {
+                    method: "delete",
+                    headers: {
+                        "x-apikey": key,
+                    }
+                };
+                fetch(url + "/" + this.id, options).then(res => { res.json(); console.log(res.statusText) })
+                hentListe();
+            }
         }
 
         hentListe()
