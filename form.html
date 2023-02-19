@@ -95,10 +95,18 @@
                 },
                 body: JSON.stringify(input),
             };
-            fetch(url, options).then(res => { res.json(); console.log(res.statusText) }).then(hentListe);
+            fetch(url, options).then(res => {
+                res.json();
+                if (res.status == 201) {
+                    hentListe();
+                } else {
+                    alert("Noget gik galt. E-mail adressen er nok allerede tilmeldt.");
+                }
+            })
         }
 
-        function hentListe() {
+        function hentListe(e) {
+            console.log(e);
             const options = {
                 headers: {
                     "x-apikey": key,
