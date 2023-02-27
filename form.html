@@ -13,7 +13,7 @@
         }
 
         section {
-            max-width: 400px;
+            max-width: 500px;
         }
 
         form,
@@ -41,7 +41,7 @@
         }
 
         li span {
-            padding: .8em;
+            padding: .4em .8em;
             position: absolute;
             cursor: pointer;
             right: 0;
@@ -133,9 +133,8 @@
         }
 
         function slet() {
-            console.log(this);
             if (confirm("Slet bruger?")) {
-                //this.parentElement.remove();
+                this.parentElement.remove();
                 const options = {
                     method: "delete",
                     headers: {

@@ -33,12 +33,18 @@
         <article>
             <img src="" alt="" class="billedurl" />
             <h2 class="navn"></h2>
-            <form class="hobby"></form>
+            <p class="email"></p>
         </article>
     </template>
 
     <script>
-        const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+        //https://592a68zq.directus.app/products
+        //rKKLNlAFpD8aHUH9e6c6slQw33bzFWoe
+
+        //const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+
+        const imgurl = "https://lxonjeyw.directus.app/assets/"
+        const url = "https://lxonjeyw.directus.app/items/Personer";
 
         const options = {
             headers: {
@@ -47,20 +53,22 @@
         };
 
         async function hentData() {
-            const resspons = await fetch(url, options);
+            const resspons = await fetch(url);
             const json = await resspons.json();
-            vis(json);
+            vis(json)
         }
 
         const main = document.querySelector("main");
         const template = document.querySelector("template").content;
 
         function vis(json) {
-            json.forEach((person) => {
+            console.log(json.data);
+            json.data.forEach((person) => {
+                console.log(imgurl + person.profilbillede);
                 const klon = template.cloneNode(true);
-                klon.querySelector(".billedurl").src = "faces/" + person.billede;
+                klon.querySelector(".billedurl").src = imgurl + person.profilbillede;
                 klon.querySelector(".navn").textContent = person.fornavn;
-                klon.querySelector(".hobby").innerHTML = person.hobby;
+                klon.querySelector(".email").innerHTML = person.email;
                 main.appendChild(klon);
             });
         }
