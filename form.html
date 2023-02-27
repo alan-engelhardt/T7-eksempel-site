@@ -74,13 +74,12 @@
     <script>
         const liste = document.querySelector("ul");
         const form = document.querySelector("form");
-        const url = "https://test2-ebca.restdb.io/rest/mailingliste";
-        const key = "5fcf499dff9d67063814034f";
+        const imgurl = "https://lxonjeyw.directus.app/assets/";
+        const url = "https://lxonjeyw.directus.app/items/Personer";
 
         form.addEventListener("submit", handleForm);
 
         function handleForm(e) {
-            console.log(form.elements.tekst.value)
             e.preventDefault();
             const input = {
                 navn: form.elements.navn.value,
@@ -90,8 +89,7 @@
             const options = {
                 method: "post",
                 headers: {
-                    "Content-Type": "application/json",
-                    "x-apikey": key,
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify(input),
             };
@@ -107,21 +105,16 @@
 
         function hentListe(e) {
             console.log(e);
-            const options = {
-                headers: {
-                    "x-apikey": key,
-                }
-            };
-            fetch(url, options).then(res => res.json()).then(vis);
+            fetch(url).then(res => res.json()).then(vis);
         }
 
         function vis(mailingliste) {
             liste.textContent = "";
-            mailingliste.forEach(medlem => {
+            mailingliste.data.forEach(medlem => {
                 const nyLi = document.createElement("li");
                 const nyP = document.createElement("p");
                 const nyS = document.createElement("span");
-                nyLi.innerHTML = medlem.navn + " <a href='mailto:" + medlem.email + "'>" + medlem.email + "</a>";
+                nyLi.innerHTML = medlem.fornavn + " <a href='mailto:" + medlem.email + "'>" + medlem.email + "</a>";
                 nyP.textContent = medlem.tekst;
                 nyS.innerHTML = "&#10005";
                 nyS.id = medlem._id;
@@ -134,12 +127,9 @@
 
         function slet() {
             if (confirm("Slet bruger?")) {
-                this.parentElement.remove();
+                //this.parentElement.remove();
                 const options = {
-                    method: "delete",
-                    headers: {
-                        "x-apikey": key,
-                    }
+                    method: "delete"
                 };
                 fetch(url + "/" + this.id, options).then(res => { res.json(); console.log(res.statusText) })
                 hentListe();

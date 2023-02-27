@@ -38,19 +38,8 @@
     </template>
 
     <script>
-        //https://592a68zq.directus.app/products
-        //rKKLNlAFpD8aHUH9e6c6slQw33bzFWoe
-
-        //const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
-
-        const imgurl = "https://lxonjeyw.directus.app/assets/"
+        const imgurl = "https://lxonjeyw.directus.app/assets/";
         const url = "https://lxonjeyw.directus.app/items/Personer";
-
-        const options = {
-            headers: {
-                "x-apikey": "600fe9211346a1524ff12e31",
-            },
-        };
 
         async function hentData() {
             const resspons = await fetch(url);
