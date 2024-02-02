@@ -1,4 +1,7 @@
-const id = 1551; // i første omgang prøver vi med et fast ID - senere bliver det også dynamisk
+// med urlParams kan vi fiske id'et ud af URL'en og vise det rigtige produkt
+
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get("id");
 const url = `https://kea-alt-del.dk/t7/api/products/${id}`;
 
 function getProduct() {

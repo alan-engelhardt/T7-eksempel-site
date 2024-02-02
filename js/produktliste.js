@@ -15,6 +15,7 @@ function visProdukter(produkter) {
     kopi.querySelector("img").alt = produkt.productdisplayname;
     kopi.querySelector("h3").textContent = produkt.productdisplayname;
     kopi.querySelector(".price span").textContent = produkt.price;
+    kopi.querySelector("a").href = `product.html?id=${produkt.id}`;
     container.appendChild(kopi);
   });
 }
