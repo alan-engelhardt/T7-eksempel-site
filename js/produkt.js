@@ -1,4 +1,4 @@
-const id = 1651;
+const id = 1551; // i første omgang prøver vi med et fast ID - senere bliver det også dynamisk
 const url = `https://kea-alt-del.dk/t7/api/products/${id}`;
 
 function getProduct() {
