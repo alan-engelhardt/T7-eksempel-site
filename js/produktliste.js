@@ -3,11 +3,11 @@ window.addEventListener("DOMContentLoaded", hentData);
 const url = `https://kea-alt-del.dk/t7/api/products?start=50&limit=50`;
 const skabelon = document.querySelector("template").content;
 const container = document.querySelector("main");
-const knapper = document.querySelectorAll("button");
+const nav = document.querySelector("#filterknapper");
 let produkter;
 let filter = "alle";
 
-knapper.forEach((knap) => knap.addEventListener("click", filtrer));
+document.querySelector("button").addEventListener("click", filtrer);
 
 function hentData() {
   fetch(url)
@@ -27,6 +27,9 @@ function bygKatNav(data) {
   katOnce.forEach((kat) => {
     let knap = document.createElement("button");
     knap.textContent = kat;
+    knap.dataset.kat = kat;
+    knap.addEventListener("click", filtrer);
+    nav.appendChild(knap);
   });
 }
 
