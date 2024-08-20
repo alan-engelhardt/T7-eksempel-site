@@ -3,14 +3,20 @@ window.addEventListener("DOMContentLoaded", hentData);
 const url = `https://kea-alt-del.dk/t7/api/products?start=10&limit=15`;
 const skabelon = document.querySelector("template").content;
 const container = document.querySelector("main");
+let data;
 
 function hentData() {
   fetch(url)
     .then((res) => res.json())
-    .then((produkter) => visProdukter(produkter));
+    .then((produkter) => {
+      data = produkter;
+      const rest = data.filter((elm) => !elm.soldout);
+      visProdukter(rest);
+    });
 }
 
 function visProdukter(produkter) {
+  console.log(produkter);
   produkter.forEach((produkt) => {
     const kopi = skabelon.cloneNode(true);
     kopi.querySelector("img").src = `https://kea-alt-del.dk/t7/images/webp/640/${produkt.id}.webp`;
