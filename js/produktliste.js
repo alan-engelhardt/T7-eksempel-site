@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", hentData);
 
-const url = `https://kea-alt-del.dk/t7/api/products?start=10&limit=50`;
+const url = `https://kea-alt-del.dk/t7/api/products?start=50&limit=50`;
 const skabelon = document.querySelector("template").content;
 const container = document.querySelector("main");
 const knapper = document.querySelectorAll("button");
@@ -14,8 +14,20 @@ function hentData() {
     .then((res) => res.json())
     .then((data) => {
       produkter = data;
+      bygKatNav(data);
       visProdukter(produkter);
     });
+}
+
+function bygKatNav(data) {
+  let kats = [];
+  data.forEach((elm) => kats.push(elm.category));
+  const katOnce = new Set(kats);
+  console.log(katOnce);
+  katOnce.forEach((kat) => {
+    let knap = document.createElement("button");
+    knap.textContent = kat;
+  });
 }
 
 function filtrer() {
@@ -33,9 +45,9 @@ function filtrer() {
 }
 
 function visProdukter(produkter) {
-  console.log(produkter);
   container.textContent = "";
   produkter.forEach((produkt) => {
+    //console.log(produkt.category);
     const kopi = skabelon.cloneNode(true);
     kopi.querySelector("img").src = `https://kea-alt-del.dk/t7/images/webp/640/${produkt.id}.webp`;
     kopi.querySelector("img").alt = produkt.productdisplayname;
