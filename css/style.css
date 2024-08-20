@@ -12,6 +12,9 @@ html {
 .mainNav > * {
   margin: 0;
 }
+.valgt {
+  background-color: aqua;
+}
 @media screen and (min-width: 700px) {
   .mainNav {
     display: flex;
