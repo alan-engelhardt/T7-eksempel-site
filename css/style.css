@@ -13,7 +13,8 @@ html {
   margin: 0;
 }
 .valgt {
-  background-color: aqua;
+  background-color: red;
+  color: white;
 }
 @media screen and (min-width: 700px) {
   .mainNav {
