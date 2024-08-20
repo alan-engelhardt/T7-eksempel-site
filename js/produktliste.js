@@ -19,11 +19,10 @@ function hentData() {
 }
 
 function filtrer() {
-  filter = this.dataset.kat;
   document.querySelector(".valgt").classList.remove("valgt");
   this.classList.add("valgt");
-  console.log(filter);
-  const valgte = produkter.filter(function (produkt) {
+  filter = this.dataset.kat;
+  const valgte = produkter.filter((produkt) => {
     return produkt.category == filter;
   });
   if (filter == "alle") {
