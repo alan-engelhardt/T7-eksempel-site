@@ -7,7 +7,7 @@ const nav = document.querySelector("#filterknapper");
 let produkter;
 let filter = "alle";
 
-document.querySelector("button").addEventListener("click", filtrer);
+//document.querySelector("button").addEventListener("click", filtrer);
 
 function hentData() {
   fetch(url)
@@ -24,8 +24,14 @@ function bygKatNav(data) {
   data.forEach((elm) => kats.push(elm.category));
   const katOnce = new Set(kats);
   console.log(katOnce);
+  let knap = document.createElement("button");
+  knap.textContent = "Alt";
+  knap.dataset.kat = "alle";
+  knap.classList.add("valgt");
+  knap.addEventListener("click", filtrer);
+  nav.appendChild(knap);
   katOnce.forEach((kat) => {
-    let knap = document.createElement("button");
+    knap = document.createElement("button");
     knap.textContent = kat;
     knap.dataset.kat = kat;
     knap.addEventListener("click", filtrer);
