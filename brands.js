@@ -8,10 +8,10 @@ function getData() {
     .then((res) => res.json())
     .then((json) => {
       json.sort((a, b) => {
-        if (a < b) {
+        if (a.brandname < b.brandname) {
           return -1;
         }
-        if (a > b) {
+        if (a.brandname > b.brandname) {
           return 1;
         }
         return 0;
