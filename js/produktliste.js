@@ -1,4 +1,6 @@
 const url = `https://kea-alt-del.dk/t7/api/products`;
+
+// et par eksempler på andre API'er
 //const url = `https://cat-fact.herokuapp.com/facts/`;
 //const url = `https://api.tvmaze.com/search/shows?q=postman`;
 
