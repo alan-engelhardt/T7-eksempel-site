@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", hentData);
 
-const url = `https://kea-alt-del.dk/t7/api/products?start=10&limit=15`;
+const url = `https://kea-alt-del.dk/t7/api/products?start=10&limit=20`;
 const skabelon = document.querySelector("template").content;
 const container = document.querySelector("main");
 const knapper = document.querySelectorAll("button");
@@ -19,7 +19,7 @@ function hentData() {
 }
 
 function filtrer() {
-  filter = this.dataset.kat;
+  filter = this.dataset.kategori;
   document.querySelector(".valgt").classList.remove("valgt");
   this.classList.add("valgt");
   console.log(filter);
