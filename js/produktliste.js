@@ -2,17 +2,16 @@ window.addEventListener("DOMContentLoaded", init);
 let url = `https://kea-alt-del.dk/t7/api/products?limit=20`;
 let skabelon, container;
 
-const urlParams = new URLSearchParams(window.location.search);
-const cat = urlParams.get("cat");
-if (cat) {
-  url = `https://kea-alt-del.dk/t7/api/products?limit=20&category=${cat}`;
-}
-
 function init() {
   skabelon = document.querySelector("template").content;
   container = document.querySelector("main");
+  const urlParams = new URLSearchParams(window.location.search);
+  const cat = urlParams.get("cat");
+  if (cat) {
+    url = `https://kea-alt-del.dk/t7/api/products?limit=20&category=${cat}`;
+    document.querySelector("h2").textContent = cat;
+  }
   getData();
-  document.querySelector("h2").textContent = cat;
 }
 
 function getData() {
@@ -31,13 +30,16 @@ function visProdukter(produkt) {
   kopi.querySelector(".subtle").textContent = produkt.usagetype;
   kopi.querySelector(".price span").textContent = produkt.price;
   kopi.querySelector("a").href += produkt.id;
+
   if (produkt.soldout) {
     kopi.querySelector("article").classList.add("soldOut");
   }
+
   if (produkt.discount) {
     kopi.querySelector("article").classList.add("onSale");
     kopi.querySelector(".discounted p span").textContent = Math.round(produkt.price - (produkt.price * produkt.discount) / 100);
     kopi.querySelector(".discounted p+p span").textContent = produkt.discount;
   }
+
   container.appendChild(kopi);
 }
