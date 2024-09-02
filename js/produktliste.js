@@ -7,8 +7,6 @@ const nav = document.querySelector("#filterknapper");
 let produkter;
 let filter = "alle";
 
-//document.querySelector("button").addEventListener("click", filtrer);
-
 function hentData() {
   fetch(url)
     .then((res) => res.json())
@@ -20,16 +18,20 @@ function hentData() {
 }
 
 function bygKatNav(data) {
+  // lav et array med alle kategorier
   let kats = [];
   data.forEach((elm) => kats.push(elm.category));
+  // lav array med en forekomst af hver kategori
   const katOnce = new Set(kats);
-  console.log(katOnce);
+  console.log(kats, katOnce);
+  // lav en ny "Alt" knap
   let knap = document.createElement("button");
   knap.textContent = "Alt";
   knap.dataset.kat = "alle";
   knap.classList.add("valgt");
   knap.addEventListener("click", filtrer);
   nav.appendChild(knap);
+  // lav en knap til hver kategori
   katOnce.forEach((kat) => {
     knap = document.createElement("button");
     knap.textContent = kat;
