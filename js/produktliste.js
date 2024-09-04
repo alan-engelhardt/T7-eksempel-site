@@ -20,7 +20,7 @@ function hentData() {
 function bygKatNav(data) {
   // lav et array med alle kategorier
   let kats = [];
-  data.forEach((elm) => kats.push(elm.category));
+  data.forEach((elm) => kats.push(elm.subcategory));
   // lav array med en forekomst af hver kategori
   const katOnce = new Set(kats);
   console.log(kats, katOnce);
@@ -46,7 +46,7 @@ function filtrer() {
   this.classList.add("valgt");
   filter = this.dataset.kat;
   const valgte = produkter.filter((produkt) => {
-    return produkt.category == filter;
+    return produkt.subcategory == filter;
   });
   if (filter == "alle") {
     visProdukter(produkter);
