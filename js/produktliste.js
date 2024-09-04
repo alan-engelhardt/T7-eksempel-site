@@ -7,6 +7,7 @@ function init() {
   kategori = params.get("kategori");
   url = `https://kea-alt-del.dk/t7/api/products?category=${kategori}&limit=50`;
   nav = document.querySelector("#filterknapper");
+  document.querySelector("h2").textContent = kategori;
   skabelon = document.querySelector("template").content;
   container = document.querySelector("main");
   hentData();
