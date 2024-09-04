@@ -1,11 +1,16 @@
-window.addEventListener("DOMContentLoaded", hentData);
+const params = new URLSearchParams(window.location.search);
+window.addEventListener("DOMContentLoaded", init);
 
-const url = `https://kea-alt-del.dk/t7/api/products?start=50&limit=50`;
-const skabelon = document.querySelector("template").content;
-const container = document.querySelector("main");
-const nav = document.querySelector("#filterknapper");
-let produkter;
-let filter = "alle";
+let url, produkter, skabelon, container, kategori, nav;
+
+function init() {
+  kategori = params.get("kategori");
+  url = `https://kea-alt-del.dk/t7/api/products?category=${kategori}&limit=50`;
+  nav = document.querySelector("#filterknapper");
+  skabelon = document.querySelector("template").content;
+  container = document.querySelector("main");
+  hentData();
+}
 
 function hentData() {
   fetch(url)
